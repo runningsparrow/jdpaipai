@@ -116,6 +116,8 @@ class JdpaipaiDownloaderMiddleware(object):
 
 
 #selenium webdriver
+#download http://npm.taobao.org/mirrors/chromedriver/
+#注明:将chrome浏览器的路径设到环境变量path
 
 class webdriverDownloaderMiddleware(object):
     
