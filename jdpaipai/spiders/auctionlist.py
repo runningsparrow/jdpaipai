@@ -1,14 +1,28 @@
 # -*- coding: utf-8 -*-
+import sys
+import os
+#to resolve module not found jdpaipai
+fpath = os.path.abspath(os.path.join(os.path.dirname(__file__),".."))
+ffpath = os.path.abspath(os.path.join(fpath,".."))
+print(ffpath)
+sys.path.append(ffpath)
+
+
 import scrapy
 
-from jdpaipai.items import JdpaipaiItem
-import os
+
 import time
+from jdpaipai.items import JdpaipaiItem
+# from ..items import JdpaipaiItem
 
 class AuctionlistSpider(scrapy.Spider):
     name = 'auctionlist'
     allowed_domains = ['paipai.jd.com/auction-list/']
-    start_urls = ['https://paipai.jd.com/auction-list/']
+    # start_urls = ['https://paipai.jd.com/auction-list/']
+
+    #电脑数码
+    start_urls = ['https://paipai.jd.com/auction-list/%7B%22pageNo%22%3A1%2C%22pageSize%22%3A50%2C%22category1%22%3A%22%22%2C%22status%22%3A%22%22%2C%22orderDirection%22%3A1%2C%22orderType%22%3A1%2C%22groupId%22%3A1000005%7D?entryid=']
+    
 
     #for loop
     nextpage = 1;
@@ -85,6 +99,8 @@ class AuctionlistSpider(scrapy.Spider):
             yield scrapy.Request(url=response.url, callback=self.parse, dont_filter=True)
         else:
             print("This is the last page!")
+
+
 
 
 #代替命令行执行爬虫

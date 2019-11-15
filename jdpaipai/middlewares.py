@@ -126,7 +126,8 @@ class webdriverDownloaderMiddleware(object):
         chromeua = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.68 Safari/537.36"
         dcap = dict(DesiredCapabilities.CHROME)
         dcap["chrome.page.settings.userAgent"] = chromeua
-        self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/76.0.3809.68/chromedriver.exe",desired_capabilities=dcap)
+        # self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/76.0.3809.68/chromedriver.exe",desired_capabilities=dcap)
+        self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/79.0.3945.16/chromedriver.exe",desired_capabilities=dcap)
 
         super(webdriverDownloaderMiddleware, self).__init__()
 
@@ -135,6 +136,7 @@ class webdriverDownloaderMiddleware(object):
     # @classmethod
     def process_request(self, request, spider):
         print ("start webdriverDownloaderMiddleware process_request")
+        print(spider.name)
         # 判断该spider是否为我们的目标
         if spider.name == "auctionlist":
             self.browser.maximize_window()  # 最大化浏览器窗口
@@ -165,12 +167,56 @@ class webdriverDownloaderMiddleware(object):
             return HtmlResponse(url=nexturl, body=content, encoding="utf-8", request=request)
 
         else:
-            return None
+            # return None
+            pass
+        
+
+        if spider.name == "auctionnav":
+            self.browser.maximize_window()  # 最大化浏览器窗口
+            self.browser.implicitly_wait(2)  # 设置隐式时间等待
+            self.browser.get(request.url)
+
+            print (self.browser.title)
+            print (self.browser.current_url)
+
+            # btnlastauction = self.browser.find_element_by_xpath('//div[@id="plist"]/ul[@class="gl-wrap"]/li[last()]/div/div[@class="p-btn"]')
+            # print(btnlastauction)
+            # ActionChains(self.browser).move_to_element(btnlastauction).click(btnlastauction).perform()
+
+            # #switch to page 2
+            # self.browser.switch_to_window(self.browser.window_handles[1])
+            # content = self.browser.page_source
+            # curl = self.browser.current_url
+            # print (self.browser.title)
+            # print (self.browser.current_url)
+
+            #获取单个元素
+            # navlist = self.browser.find_element_by_xpath('//div[@class="auction_nav"]/ul/li')
+            #获取多个元素
+            navlist = self.browser.find_elements_by_xpath('//div[@class="auction_nav"]/ul/li')
+            
+            navcount = len(navlist)
+            #遍历除了第一个和最后一个的页面
+            navindex = 0
+            print("loop start")
+            for nav in navlist:
+                if navindex >0 and navindex < navcount - 1:
+                    ActionChains(self.browser).move_to_element(nav).click(nav).perform()
+                    content = self.browser.page_source
+                    curl = self.browser.current_url
+                    print(curl)
+                    return HtmlResponse(url=curl, body=content, encoding="utf-8", request=request)
+                navindex = navindex + 1
+            print("loop end")
+
+            
+
+            
 
 
 
     def process_response(self, request, response, spider):
-        print ("start webdriverDownloaderMiddleware process_request")
+        print ("start webdriverDownloaderMiddleware process_response")
         return response
 
 
