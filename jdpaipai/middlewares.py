@@ -130,6 +130,7 @@ class webdriverDownloaderMiddleware(object):
         self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/79.0.3945.16/chromedriver.exe",desired_capabilities=dcap)
 
         super(webdriverDownloaderMiddleware, self).__init__()
+        self.firstpage = 0
 
     #说明:
     #在类方法里，是无法使用　__init__ 里定义的变量，因为 __init__只在实例化的时候执行，所以需要考虑何种情况下定义类方法
@@ -152,8 +153,12 @@ class webdriverDownloaderMiddleware(object):
             print("===========================================")
             # self.browser.close();
 
-            btnnext = self.browser.find_element_by_xpath('//button[@class="btn-next"]')
-            ActionChains(self.browser).move_to_element(btnnext).click(btnnext).perform()
+            # click from page 2
+            if self.firstpage == 1:
+                btnnext = self.browser.find_element_by_xpath('//button[@class="btn-next"]')
+                ActionChains(self.browser).move_to_element(btnnext).click(btnnext).perform()
+            if self.firstpage == 0:
+                self.firstpage = 1
             print("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{")
             print(self.browser.current_url)
             #将下一页的地址返回给spider

@@ -21,8 +21,11 @@ class AuctionlistSpider(scrapy.Spider):
     # start_urls = ['https://paipai.jd.com/auction-list/']
 
     #电脑数码
-    start_urls = ['https://paipai.jd.com/auction-list/%7B%22pageNo%22%3A1%2C%22pageSize%22%3A50%2C%22category1%22%3A%22%22%2C%22status%22%3A%22%22%2C%22orderDirection%22%3A1%2C%22orderType%22%3A1%2C%22groupId%22%3A1000005%7D?entryid=']
-    
+    # start_urls = ['https://paipai.jd.com/auction-list/%7B%22pageNo%22%3A1%2C%22pageSize%22%3A50%2C%22category1%22%3A%22%22%2C%22status%22%3A%22%22%2C%22orderDirection%22%3A1%2C%22orderType%22%3A1%2C%22groupId%22%3A1000005%7D?entryid=']
+    # start_urls = ['https://paipai.jd.com/auction-list/%7B%22pageNo%22%3A83%2C%22pageSize%22%3A50%2C%22category1%22%3A%22%22%2C%22status%22%3A%22%22%2C%22orderDirection%22%3A1%2C%22orderType%22%3A1%2C%22groupId%22%3A1000005%7D?entryid=']
+
+    #母婴玩具
+    start_urls = ['https://sell.paipai.com/auction-list/%7B%22pageNo%22%3A1%2C%22pageSize%22%3A50%2C%22category1%22%3A%22%22%2C%22status%22%3A%22%22%2C%22orderDirection%22%3A1%2C%22orderType%22%3A1%2C%22groupId%22%3A1000002%7D?entryid=']
 
     #for loop
     nextpage = 1;
