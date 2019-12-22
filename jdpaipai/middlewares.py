@@ -127,7 +127,8 @@ class webdriverDownloaderMiddleware(object):
         dcap = dict(DesiredCapabilities.CHROME)
         dcap["chrome.page.settings.userAgent"] = chromeua
         # self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/76.0.3809.68/chromedriver.exe",desired_capabilities=dcap)
-        self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/79.0.3945.16/chromedriver.exe",desired_capabilities=dcap)
+        # self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/79.0.3945.16/chromedriver.exe",desired_capabilities=dcap)
+        self.browser = webdriver.Chrome(executable_path="D:/Down/chromedriver/75.0.3770.8/chromedriver.exe",desired_capabilities=dcap)
 
         super(webdriverDownloaderMiddleware, self).__init__()
         self.firstpage = 0

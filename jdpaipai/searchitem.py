@@ -23,7 +23,9 @@ class searchitem:
     def searchbyname(self,collection,itemname):
         # result = self.jdpaipaidb.getCollection(collection).find({"itemname":{"$regex":itemname}})
         itemtime = time.strftime('%Y%m%d',time.localtime(time.time()))
-        result = self.jdpaipaidb.jdpaipai1.find({"$and":[{"itemname":{"$regex":itemname}},{"itemtimestamp":{"$regex":itemtime}}]})
+        collection1 = self.jdpaipaidb[collection]
+        result = collection1.find({"$and":[{"itemname":{"$regex":itemname}},{"itemtimestamp":{"$regex":itemtime}}]})
+        # result = self.jdpaipaidb.jdpaipai1.find({"$and":[{"itemname":{"$regex":itemname}},{"itemtimestamp":{"$regex":itemtime}}]})
         print(result)
         print("debug1")
         for one in result:
@@ -41,5 +43,7 @@ if __name__ == '__main__':
 
     sritem.mongodbconn(host,port,username,userpass)
     itemname = "Xbox"
+    collection = 'jdpaipai1'
+    # itemname = "索尼"
     # itemname = "变形金刚"
     sritem.searchbyname(collection,itemname)
