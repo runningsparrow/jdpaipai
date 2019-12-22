@@ -82,6 +82,30 @@ class AuctionlistSpider(scrapy.Spider):
             print(itemstatus)
             jditem['itemstatus']= itemstatus[0]
 
+            #added for time
+            # itemtime_desc = scrapy.Field()
+            # itemtime_hour = scrapy.Field()
+            # itemtime_minute = scrapy.Field()
+            # itemtime_second = scrapy.Field()
+
+            itemtime_desc = item.xpath('div/div[@class="p-time"]/span[@class="desc"]/text()').extract()
+            print(itemtime_desc)
+            jditem['itemtime_desc'] = itemtime_desc[0]
+
+            itemtime_hour = item.xpath('div/div[@class="p-time"]/span[@class="time"]/b[1]/text()').extract()
+            print(itemtime_hour)
+            jditem['itemtime_hour'] = itemtime_hour[0]
+
+
+            itemtime_minute = item.xpath('div/div[@class="p-time"]/span[@class="time"]/b[last()-1]/text()').extract()
+            print(itemtime_minute)
+            jditem['itemtime_minute'] = itemtime_minute[0]
+
+
+            itemtime_second = item.xpath('div/div[@class="p-time"]/span[@class="time"]/b[last()]/text()').extract()
+            print(itemtime_second)
+            jditem['itemtime_second'] = itemtime_second[0]
+
 
             jditem['itemtimestamp'] = time.strftime('%Y%m%d%H%M%S',time.localtime(time.time()))
             print(jditem['itemtimestamp'])

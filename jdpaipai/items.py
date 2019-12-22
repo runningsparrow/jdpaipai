@@ -20,4 +20,8 @@ class JdpaipaiItem(scrapy.Item):
     itemrepo = scrapy.Field()
     itemname = scrapy.Field()
     itemstatus = scrapy.Field()
+    itemtime_desc = scrapy.Field()
+    itemtime_hour = scrapy.Field()
+    itemtime_minute = scrapy.Field()
+    itemtime_second = scrapy.Field()
     itemtimestamp = scrapy.Field()
